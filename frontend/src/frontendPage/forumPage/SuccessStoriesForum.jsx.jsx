@@ -175,7 +175,7 @@ const SuccessStoriesForum = () => {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 flex items-center gap-2">
+        <h2 className="text-3xl font-extrabold text-yellow-400 flex items-center gap-2">
           🏆 Success Stories
         </h2>
         <motion.p
@@ -190,107 +190,141 @@ const SuccessStoriesForum = () => {
 
       <div className="flex flex-col md:flex-row justify-between mb-6 gap-4">
         <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => {
-              setShowUserPosts(false);
-              setSearchTerm("");
-            }}
-            className={`px-4 py-2 rounded-full ${!showUserPosts ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
-          >
-            View All Stories
-          </button>
-          {localStorage.getItem("token") && (
-            <button
-              onClick={() => {
-                setShowUserPosts(true);
-                setSearchTerm("");
-              }}
-              className={`px-4 py-2 rounded-full ${showUserPosts ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
-            >
-              My Stories
-            </button>
-          )}
+        <button
+  onClick={() => {
+    setShowUserPosts(false);
+    setSearchTerm("");
+  }}
+  className={`px-6 py-2 rounded-full font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ${
+    !showUserPosts
+      ? '!bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+      : '!bg-blue-100 text-blue-700'
+  }`}
+>
+  View All Stories
+</button>
+
+{localStorage.getItem("token") && (
+  <button
+    onClick={() => {
+      setShowUserPosts(true);
+      setSearchTerm("");
+    }}
+    className={`px-6 py-2 rounded-full font-semibold shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 ml-3 ${
+      showUserPosts
+        ? '!bg-gradient-to-r from-orange-500 !to-orange-600 text-white'
+        : '!bg-orange-100 text-orange-700'
+    }`}
+  >
+    My Stories
+  </button>
+)}
+
         </div>
 
-        <div className="relative flex-grow max-w-md">
-          <input
-            type="text"
-            placeholder="Search stories or tags..."
-            className="w-full bg-white/30 backdrop-blur-lg text-gray-800 placeholder-gray-600 border border-gray-300 rounded-full py-2 pl-5 pr-12 focus:outline-none focus:ring-2 focus:ring-gray-500 shadow-lg transition-all duration-300"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-gray-700 to-black p-2 rounded-full flex items-center justify-center hover:scale-105 transition-all duration-300">
-            <FaSearch size={14} color="white" />
-          </button>
-        </div>
-      </div>
+        <div className="flex justify-end mb-4">
+  <div className="flex items-center  ">
+    <input
+      type="text"
+      placeholder="Search stories or tags..."
+      className="w-80 bg-white/30 backdrop-blur-lg text-gray-800 placeholder-gray-600 border border-gray-300 rounded-full py-3 px-5 focus:outline-none focus:ring-2 focus:ring-gray-500 shadow-lg transition-all duration-300"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+    <button
+      className="ml-2 !bg-gray-700 text-white px-4 py-2 rounded-lg"
+      
+    >
+      Search
+    </button>
+  </div>
+</div>
 
-      <div className="mt-6 space-y-6">
+             </div>
+
+      <div className="mt-9 ml-20 space-y-6 ">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <div key={post._id} className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <div className="flex justify-between items-start">
-                <h3 className="font-bold text-xl text-orange-600">{post.title}</h3>
-                <button
-                  onClick={() => toggleExpandPost(post._id)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  {expandedPosts[post._id] ? <FaChevronUp /> : <FaChevronDown />}
-                </button>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mt-2 mb-4">
-                {post.tags.map((tag, index) => (
-                  <span 
-                    key={index} 
-                    className="bg-gray-100 px-2 py-1 rounded-full text-xs text-gray-700 cursor-pointer hover:bg-gray-200"
-                    onClick={() => setSearchTerm(tag)}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              
-              {expandedPosts[post._id] ? (
-                <>
-                  <div style={{ whiteSpace: "pre-line" }} className="text-gray-700 mb-4">
-                    {post.content}
+              <div className="flex flex-col md:flex-row gap-4">
+                {/* Left side - content */}
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <h3 className="font-bold text-xl text-green-600">{post.title}</h3>
+                    <button
+                      onClick={() => toggleExpandPost(post._id)}
+                      className="text-white hover:text-white"
+                    >
+                      {expandedPosts[post._id] ? <FaChevronUp /> : <FaChevronDown />}
+                    </button>
                   </div>
-                  {post.image && (
+                  
+                  <div className="flex flex-wrap gap-2 mt-2 mb-4">
+                    {post.tags.map((tag, index) => (
+                      <span 
+                        key={index} 
+                        className="bg-gray-100 px-2 py-1 rounded-full text-xs text-gray-700 cursor-pointer hover:bg-gray-200"
+                        onClick={() => setSearchTerm(tag)}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  {expandedPosts[post._id] ? (
+                    <div style={{ whiteSpace: "pre-line" }} className="text-gray-700 mb-4">
+                      {post.content}
+                    </div>
+                  ) : (
+                    <p className="text-gray-700 mb-4 line-clamp-3">
+                      {post.content.split('\n')[0]}
+                    </p>
+                  )}
+
+                  <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
+                    <span className="text-sm text-gray-500">Posted by {post.name}</span>
+                    
+                    {showUserPosts && (
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEditPost(post)}
+                          className="!bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition"
+                        >
+                          <FaEdit size={14} />
+                        </button>
+                        <button
+                          onClick={() => handleDeletePost(post._id)}
+                          className="!bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
+                        >
+                          <FaTrash size={14} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right side - image (shown when collapsed) */}
+                {!expandedPosts[post._id] && post.image && (
+                  <div className="w-full md:w-1/3 flex-shrink-0">
                     <img 
                       src={post.image} 
                       alt="Post" 
-                      className="mt-5 w-full max-w-md h-auto object-cover rounded-lg shadow-md"
+                      className="w-full h-48 object-cover rounded-lg shadow-md"
                     />
-                  )}
-                </>
-              ) : (
-                <p className="text-gray-700 mb-4 line-clamp-3">
-                  {post.content.split('\n')[0]}
-                </p>
-              )}
-
-              <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
-                <span className="text-sm text-gray-500">Posted by {post.name}</span>
-                
-                {showUserPosts && (
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => handleEditPost(post)}
-                      className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition"
-                    >
-                      <FaEdit size={14} />
-                    </button>
-                    <button
-                      onClick={() => handleDeletePost(post._id)}
-                      className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
-                    >
-                      <FaTrash size={14} />
-                    </button>
                   </div>
                 )}
               </div>
+
+              {/* Full width image (shown when expanded) */}
+              {expandedPosts[post._id] && post.image && (
+                <div className="mt-5 flex  h-78 w-150 ml-60">
+                  <img 
+                    src={post.image} 
+                    alt="Post" 
+                    className="w-full max-w-md h-auto object-cover rounded-lg shadow-md"
+                  />
+                </div>
+              )}
             </div>
           ))
         ) : (
@@ -328,8 +362,8 @@ const SuccessStoriesForum = () => {
 
       {showForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50 p-4">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl font-bold text-orange-600 mb-4">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl max-h-[100vh] overflow-y-auto">
+            <h2 className="text-xl font-bold text-red-600 mb-4">
               {editingPost ? "Edit Your Story" : "Share Your Success Story"}
             </h2>
             
@@ -406,14 +440,14 @@ const SuccessStoriesForum = () => {
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+                  className="px-4 py-2 !bg-red-600 text-white rounded hover:bg-gray-400 transition"
                   disabled={isUploading}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition flex items-center justify-center min-w-[120px]"
+                  className="px-4 py-2 !bg-green-500 text-white rounded !hover:bg-green-600 transition flex items-center justify-center min-w-[120px]"
                   disabled={isUploading}
                 >
                   {isUploading ? (

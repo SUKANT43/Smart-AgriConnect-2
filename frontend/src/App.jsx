@@ -19,7 +19,6 @@ import Feedback from "./frontendPage/feedBackPage/feedBack";
 import Login from "./frontendPage/Authentication/login";
 import PersonalInformation from "./frontendPage/navbarPage/PersonalInformation.jsx";
 import TranslateComponent from "./frontendPage/translation/TranslateComponent.jsx";
-import MyDiscussion from "./frontendPage/forumPage/MyDiscussion.jsx";
 
 function AppContent() {
   return (
@@ -46,7 +45,6 @@ function AppContent() {
           <Route path="/success-stories" element={<SuccessStoriesForum />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/personal-info" element={<PersonalInformation />} />
-          <Route path="/my-discussion" element={<MyDiscussion/>}/>
         </Routes>
       </div>
     </>

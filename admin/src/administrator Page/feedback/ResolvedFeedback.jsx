@@ -60,7 +60,7 @@ const ResolvedFeedback = () => {
             <p><strong>Email:</strong> {fb.email}</p>
             <p><strong>Category:</strong> {fb.category}</p>
             <p><strong>Description:</strong> {fb.description}</p>
-            <p><strong>Rating:</strong> {fb.rating} ⭐</p>
+            <p><strong>Rating:</strong> {fb.rating}⭐</p>
             <div className="flex gap-2 mt-2">
               <button
                 onClick={() => markAsUnresolved(fb._id)}
